@@ -1,0 +1,7 @@
+spring:
+  application:
+    name: phone-inventory-data
+
+restful:
+  api:
+    url: https://api.restful-api.dev/objects

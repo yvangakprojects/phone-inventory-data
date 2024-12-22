@@ -2,22 +2,22 @@ package rw.phonix.inventory.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 import reactor.core.publisher.Mono;
 import rw.phonix.inventory.Model.PhoneInventory;
+import rw.phonix.inventory.systemclients.RestFulApiClient;
 
 @Service
 @Slf4j
 public class PhoneInventoryService {
 
-    private final RestTemplate restTemplate;
+    private final RestFulApiClient restFulApiClient;
 
-    public PhoneInventoryService(RestTemplate restTemplate){
-        this.restTemplate = restTemplate;
+    public PhoneInventoryService(RestFulApiClient restFulApiClient) {
+        this.restFulApiClient = restFulApiClient;
     }
 
-    public Mono<Boolean> saveInventory(String id, PhoneInventory phoneInventory) {
-        log.info("saveInventory, id:{} phoneInventory:{}", id, phoneInventory);
-        return Mono.just(Boolean.TRUE);
+    public Mono<PhoneInventory> saveInventory(PhoneInventory phoneInventory) {
+        log.info("PhoneInventoryService-saveInventory, phoneInventory:{}", phoneInventory);
+        return restFulApiClient.postPhoneInventoryDataToExternalApi(phoneInventory);
     }
 }
