@@ -1,9 +1,9 @@
 
-FROM openjdk:23-jdk-alpine
+FROM eclipse-temurin:23-jdk-alpine
 
 WORKDIR /app
 
-COPY target/*.jar app.jar
+COPY /build/libs/*.jar app.jar
 
 EXPOSE 8080
 
